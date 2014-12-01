@@ -130,13 +130,13 @@ public class HSVPicker : MonoBehaviour {
             posY %= 1;
         }
 
-        posY=Mathf.Clamp(posY, 0, .9999f);
-        posX =Mathf.Clamp(posX, 0, .9999f);
+        posY = Mathf.Clamp(posY, 0, .9999f);
+        posX = Mathf.Clamp(posX, 0, .9999f);
         
 
         cursorX = posX;
         cursorY = posY;
-        cursor.rectTransform.anchoredPosition = new Vector2(posX * hsvImage.rectTransform.rect.width, posY * hsvImage.rectTransform.rect.height - hsvImage.rectTransform.rect.height);
+		cursor.rectTransform.anchoredPosition = new Vector2(posX * hsvImage.rectTransform.rect.width  , posY * hsvImage.rectTransform.rect.height - hsvImage.rectTransform.rect.height);
 
         currentColor = GetColor(cursorX, cursorY);
         colorImage.color = currentColor;
