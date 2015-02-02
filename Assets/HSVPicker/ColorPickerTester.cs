@@ -10,11 +10,11 @@ public class ColorPickerTester : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-        picker.onValueChanged.AddListener(color =>
+/*        picker.onValueChanged.AddListener(color =>
         {
             renderer.material.color = color;
         });
-	}
+*/	}
 	
 	// Update is called once per frame
 	void Update () {
