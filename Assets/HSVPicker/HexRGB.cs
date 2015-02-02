@@ -7,13 +7,14 @@ using System.Globalization;
 public class HexRGB : MonoBehaviour {
 
 	public Text textColor; 
+	public InputField hexField;
 
 	public HSVPicker hsvpicker; 
 
 	public void ManipulateViaRGB2Hex(){
 		Color color = HSVPicker.currentColor;
 		string hex = ColorToHex (color);
-		textColor.text = hex;
+		hexField.text = hex;
 	}
 
 	public static string ColorToHex(Color color){
@@ -67,6 +68,20 @@ public class HexRGB : MonoBehaviour {
 		
 		return new Vector3 (red, green, blue);
 	
+	}
+	string ColorToHex(Color32 color)
+	{
+		string hex = ((int)color.r).ToString("X2") + ((int)color.g).ToString("X2") + ((int)color.b).ToString("X2");
+		Debug.Log("c to h "+hex);
+		return hex;
+	}
+	
+	Color HexToColor(string hex)
+	{
+		byte r = byte.Parse(hex.Substring(0,2), System.Globalization.NumberStyles.HexNumber);
+		byte g = byte.Parse(hex.Substring(2,2), System.Globalization.NumberStyles.HexNumber);
+		byte b = byte.Parse(hex.Substring(4,2), System.Globalization.NumberStyles.HexNumber);
+		return new Color32(r,g,b, 255);
 	}
 
 }

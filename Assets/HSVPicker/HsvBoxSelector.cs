@@ -18,16 +18,17 @@ public class HsvBoxSelector : MonoBehaviour, IDragHandler, IPointerDownHandler {
 
     void PlaceCursor(PointerEventData eventData)
     {
-
-        var pos = new Vector2(eventData.position.x - picker.hsvImage.rectTransform.position.x, picker.hsvImage.rectTransform.rect.height * picker.hsvImage.transform.lossyScale.y - (picker.hsvImage.rectTransform.position.y - eventData.position.y));
-        // Debug.Log(pos);
+		Vector2 pos = new Vector2();
+		pos.y= picker.hsvImage.rectTransform.rect.height * picker.hsvImage.transform.lossyScale.y - (picker.hsvImage.rectTransform.position.y - eventData.position.y);
+		pos.x=picker.hsvImage.rectTransform.rect.width * picker.hsvImage.transform.lossyScale.x - (picker.hsvImage.rectTransform.position.x - eventData.position.x);
         pos.x /= picker.hsvImage.rectTransform.rect.width * picker.hsvImage.transform.lossyScale.x;
         pos.y /= picker.hsvImage.rectTransform.rect.height * picker.hsvImage.transform.lossyScale.y;
+        pos.x -=.5f;
+//		Debug.Log("pos is "+pos);
 
         pos.x = Mathf.Clamp(pos.x, 0, .9999f);  //1 is the same as 0
         pos.y = Mathf.Clamp(pos.y, 0, .9999f);
 
-        //Debug.Log(pos);
         picker.MoveCursor(pos.x, pos.y);
     }
 
