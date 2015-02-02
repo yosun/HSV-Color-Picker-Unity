@@ -43,14 +43,12 @@ public class HSVPicker : MonoBehaviour {
 		{
 			Color color=((Texture2D)hsvSlider.texture).GetPixel((int)(hsvSlider.rectTransform.rect.width*.5f),(int)(hsvSlider.rectTransform.rect.height*(newValue)));
 			currentColor=color;
-			Debug.Log(color);
-/*			if (!dontAssignUpdate)
+			if (!dontAssignUpdate)
 			{
-				UpdateInputs();
 				AssignColor(currentColor);
 			}
 			hexrgb.ManipulateViaRGB2Hex();
-*/        });
+        });
         sliderR.onValueChanged.AddListener(newValue =>
         {
             currentColor.r = newValue;
@@ -87,23 +85,11 @@ public class HSVPicker : MonoBehaviour {
         MoveCursor(cursorX, cursorY);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    var color = new Color(45f / 255, 200f / 255, 255f / 255);
-        //    Debug.Log(color);
-        //    AssignColor(color);
-
-       // }
-
-        
-	}
-
 
     public void AssignColor(Color color)
     {
         
+		dontAssignUpdate=true;
         HsvColor hsv = HSVUtil.ConvertRgbToHsv(color);
 		
         // Debug.Log(hsv.ToString());
@@ -119,7 +105,6 @@ public class HSVPicker : MonoBehaviour {
         //    hsv.V %= 1f;
         //}
 
-        dontAssignUpdate=true;
         MovePointer(hOffset, false);
         MoveCursor((float)hsv.S, (float)hsv.V, false);
         currentColor = color;
@@ -127,14 +112,14 @@ public class HSVPicker : MonoBehaviour {
         colorImage.color = currentColor;
 
 //        onValueChanged.Invoke(currentColor);
-		hsvImage.texture = HSVUtil.GenerateColorTexture((int)hsvImage.rectTransform.rect.width, (int)hsvImage.rectTransform.rect.height, currentColor);		
+//z		hsvImage.texture = HSVUtil.GenerateColorTexture((int)hsvImage.rectTransform.rect.width, (int)hsvImage.rectTransform.rect.height, currentColor);		
         dontAssignUpdate=false;
     }
     
     
     public Color MoveCursor(float posX, float posY, bool updateInputs=true)
     {
-        dontAssignUpdate = updateInputs;
+//        dontAssignUpdate = updateInputs;
         if (posX > 1)
         {
             posX %= 1;
@@ -160,7 +145,7 @@ public class HSVPicker : MonoBehaviour {
             UpdateInputs();
 //            onValueChanged.Invoke(currentColor);
         }
-        dontAssignUpdate = false;
+//        dontAssignUpdate = false;
         return currentColor;
     }
 
@@ -172,7 +157,7 @@ public class HSVPicker : MonoBehaviour {
 
     public Color MovePointer(float newPos, bool updateInputs = true)
     {
-        dontAssignUpdate = updateInputs;
+//        dontAssignUpdate = updateInputs;
         if (newPos > 1)
         {
             newPos %= 1f;//hsv
@@ -209,7 +194,7 @@ public class HSVPicker : MonoBehaviour {
             UpdateInputs();
 //            onValueChanged.Invoke(currentColor);
         }
-        dontAssignUpdate = false;
+//        dontAssignUpdate = false;
         return currentColor;
     }
 
@@ -223,6 +208,7 @@ public class HSVPicker : MonoBehaviour {
         sliderRText.text = "R:"+ (currentColor.r * 255f);
         sliderGText.text = "G:" + (currentColor.g * 255f);
         sliderBText.text = "B:" + (currentColor.b * 255f);
+        dontAssignUpdate=false;
         
     }
 
