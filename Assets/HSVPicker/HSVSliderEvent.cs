@@ -1,17 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+using System;
+using UnityEngine;
 using UnityEngine.Events;
 
-public class HSVSliderEvent : UnityEvent<Color>
-{
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-}
+[Serializable]
+public class HSVSliderEvent : UnityEvent<Color>{}
